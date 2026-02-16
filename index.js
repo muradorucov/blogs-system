@@ -1,15 +1,20 @@
 const express = require("express");
 const router = require("./src/routers");
+const mongoDbConnection = require("./src/db");
+const config = require("./src/config");
 
 require("dotenv").config();
 const app = express();
 
-app.use(express.json());
+mongoDbConnection();
 
-app.use("/api/v1", router)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/v1", router);
 
 
 // http://localhost:3000/api/v1/auth/login
 // http://localhost:3000/api/v1/auth/login
 // http://localhost:3000/api/v1/blogs/
-app.listen(process.env.PORT)
+app.listen(config.PORT)

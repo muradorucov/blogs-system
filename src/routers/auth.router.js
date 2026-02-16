@@ -9,9 +9,10 @@ const {
   resetPassword,
   verifyUser
 } = require("../controllers/auth.controller");
+const upload = require("../utils/upload");
 
 authRouter.post("/login", login)
-authRouter.post("/register", register)
+authRouter.post("/register", upload.single("avatar"), register)
 authRouter.post("/logout", logout)
 authRouter.get("/current", currentUser)
 authRouter.post("/forgot-pass", forGotPassword)
